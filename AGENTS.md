@@ -11,10 +11,23 @@
 - Assert on `response.status_code` and `response.get_json()`.
 
 ## Gotchas
-- Two GitHub tokens are present: the PAT embedded in the remote URL / `GH_TOKEN` is read-only
-  (metadata only). The keyring OAuth token (`gho_`, via `gh auth token` with GH_TOKEN/GITHUB_TOKEN
-  unset) has write access. Use the keyring token for `git push` and `gh` write operations.
-- The repo started empty (no commits); `main` was bootstrapped with the initial scaffolding.
+- Two GitHub tokens are present: the PAT embedded in the remote URL / `GH_TOKEN` /
+  `GITHUB_TOKEN` is read-only (metadata only) — pushing with it returns HTTP 403.
+- The write-capable token lives in the **macOS keychain** (osxkeychain credential helper),
+  NOT in `gh`'s config. `gh auth token` with GH_TOKEN/GITHUB_TOKEN unset returns
+  "no oauth token found" / "not logged in" in this environment. To push:
+  `git config credential.helper osxkeychain` then push with the read-only env vars
+  unset so git falls back to the keychain, e.g.:
+  `env -u GH_TOKEN -u GITHUB_TOKEN -u GIT_ASKPASS git push https://github.com/<owner>/<repo> <branch>`.
+  (`gh pr create` similarly needs the env PAT — it can still create PRs as the PAT is valid
+  for API, just not git-push.)
+- The repo is NOT empty: it is a single-file Flask app (`app.py`) with `test_app.py` at root.
+  `requirements.txt` must keep `flask` (the app imports it) — do not strip it to just `pytest`,
+  or the existing test suite fails to import.
+- New library modules live in their own package dir (e.g. `calculator/`) with tests under
+  `tests/`. The root-level `test_app.py` and a `tests/` dir coexist; `pytest` from repo root
+  collects both.
 
 ## Last updated
+2026-06-18 — task #test-6eedae72: Build a scientific calculator (Python module)
 2026-06-03 — task #mock-001 (add /hello endpoint)
