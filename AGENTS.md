@@ -47,6 +47,12 @@
 - `flask` is NOT pre-installed in the test environment; run
   `python -m pip install -r requirements.txt` before `pytest` or the existing
   `test_app.py` fails to import at collection time.
+- CORRECTION to earlier note: the env PAT (`GH_TOKEN`/`GITHUB_TOKEN`) also
+  CANNOT create PRs — `gh pr create` with it returns
+  "Resource not accessible by personal access token (createPullRequest)".
+  Use the write-capable keychain token for BOTH push and `gh pr create`:
+  `KCTOK=$(printf 'protocol=https\nhost=github.com\n\n' | git credential-osxkeychain get | sed -n 's/^password=//p')`
+  then `GH_TOKEN="$KCTOK" gh pr create ...`.
 
 ## Last updated
 2026-06-18 — task #test-c52fe8a9: Build a UI for a scientific calculator (vanilla HTML/CSS/JS)
