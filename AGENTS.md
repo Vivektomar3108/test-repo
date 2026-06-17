@@ -28,6 +28,27 @@
   `tests/`. The root-level `test_app.py` and a `tests/` dir coexist; `pytest` from repo root
   collects both.
 
+## Frontend / static assets
+- Vanilla web UIs live in their own dir (e.g. `webui/`) with `index.html`,
+  `styles.css`, `app.js` — no build step, no npm, no CDN. Use relative
+  `href`/`src` so the page works fully offline (`open webui/index.html`).
+- There is no JS runtime (no `node`/`deno`/`bun`) in this environment, so JS
+  cannot be executed in CI. Cover static assets with a pytest module
+  (`tests/test_webui.py`) that asserts the structural contract: files exist,
+  no `http(s)://` or protocol-relative `src="//"` refs, required buttons
+  (`data-insert=` / `data-action=`) present, and `eval(` absent (strip JS
+  comments before that check so source prose doesn't trip it).
+- For "no eval" expression evaluation: tokenizer → shunting-yard → RPM/RPN
+  evaluator with a whitelist of operators/functions. Postfix `!`/`%` emit to
+  output immediately (bind tightest); detect unary minus when `-` starts the
+  expr or follows an operator/`(`.
+
+## Gotchas (continued)
+- `flask` is NOT pre-installed in the test environment; run
+  `python -m pip install -r requirements.txt` before `pytest` or the existing
+  `test_app.py` fails to import at collection time.
+
 ## Last updated
+2026-06-18 — task #test-c52fe8a9: Build a UI for a scientific calculator (vanilla HTML/CSS/JS)
 2026-06-18 — task #test-6eedae72: Build a scientific calculator (Python module)
 2026-06-03 — task #mock-001 (add /hello endpoint)
