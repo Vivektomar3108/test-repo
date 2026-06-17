@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="calculator" aria-label="Scientific calculator">
+    <div class="display" id="display" role="textbox" aria-readonly="true" aria-live="polite">0</div>
+
+    <!-- Scientific functions (radians) -->
+    <div class="keys keys-fn">
+      <button type="button" class="key key-fn" data-insert="sin(">sin</button>
+      <button type="button" class="key key-fn" data-insert="cos(">cos</button>
+      <button type="button" class="key key-fn" data-insert="tan(">tan</button>
+      <button type="button" class="key key-fn" data-insert="log(">log</button>
+      <button type="button" class="key key-fn" data-insert="ln(">ln</button>
+
+      <button type="button" class="key key-fn" data-insert="exp(">exp</button>
+      <button type="button" class="key key-fn" data-insert="sqrt(">√</button>
+      <button type="button" class="key key-fn" data-insert="^">x^y</button>
+      <button type="button" class="key key-fn" data-insert="!">n!</button>
+      <button type="button" class="key key-fn" data-insert="pi">π</button>
+    </div>
+
+    <!-- Main keypad -->
+    <div class="keys keys-pad">
+      <button type="button" class="key key-action key-clear" data-action="clear">C</button>
+      <button type="button" class="key key-action" data-action="back">←</button>
+      <button type="button" class="key key-op" data-insert="%">%</button>
+      <button type="button" class="key key-fn" data-insert="e">e</button>
+
+      <button type="button" class="key key-op" data-insert="(">(</button>
+      <button type="button" class="key key-op" data-insert=")">)</button>
+      <button type="button" class="key key-action" data-action="sign">+/−</button>
+      <button type="button" class="key key-op" data-insert="/">&divide;</button>
+
+      <button type="button" class="key" data-insert="7">7</button>
+      <button type="button" class="key" data-insert="8">8</button>
+      <button type="button" class="key" data-insert="9">9</button>
+      <button type="button" class="key key-op" data-insert="*">&times;</button>
+
+      <button type="button" class="key" data-insert="4">4</button>
+      <button type="button" class="key" data-insert="5">5</button>
+      <button type="button" class="key" data-insert="6">6</button>
+      <button type="button" class="key key-op" data-insert="-">&minus;</button>
+
+      <button type="button" class="key" data-insert="1">1</button>
+      <button type="button" class="key" data-insert="2">2</button>
+      <button type="button" class="key" data-insert="3">3</button>
+      <button type="button" class="key key-op" data-insert="+">+</button>
+
+      <button type="button" class="key key-zero" data-insert="0">0</button>
+      <button type="button" class="key" data-insert=".">.</button>
+      <button type="button" class="key key-equals" data-action="equals" id="equals">=</button>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

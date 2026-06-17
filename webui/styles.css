@@ -1,0 +1,147 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --display-bg: #0b1220;
+  --key: #334155;
+  --key-hover: #3f4f66;
+  --key-active: #273141;
+  --key-op: #2563eb;
+  --key-op-hover: #3b76f0;
+  --key-fn: #475569;
+  --key-fn-hover: #54657d;
+  --key-equals: #16a34a;
+  --key-equals-hover: #1cb653;
+  --key-clear: #b91c1c;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 420px;
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.display {
+  background: var(--display-bg);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  min-height: 72px;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.display.error {
+  color: #f87171;
+}
+
+.keys {
+  display: grid;
+  gap: 8px;
+}
+
+.keys-fn {
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 8px;
+}
+
+.keys-pad {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.key {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 600;
+  color: var(--text);
+  background: var(--key);
+  transition: background 0.12s ease, transform 0.05s ease;
+  user-select: none;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:active {
+  background: var(--key-active);
+  transform: translateY(1px);
+}
+
+.key:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6);
+}
+
+.key-fn {
+  background: var(--key-fn);
+  font-size: clamp(0.85rem, 3.4vw, 1.05rem);
+}
+
+.key-fn:hover {
+  background: var(--key-fn-hover);
+}
+
+.key-op {
+  background: var(--key-op);
+}
+
+.key-op:hover {
+  background: var(--key-op-hover);
+}
+
+.key-equals {
+  background: var(--key-equals);
+}
+
+.key-equals:hover {
+  background: var(--key-equals-hover);
+}
+
+.key-clear {
+  background: var(--key-clear);
+}
+
+.key-clear:hover {
+  filter: brightness(1.12);
+}
+
+.key-zero {
+  grid-column: span 2;
+}

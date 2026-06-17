@@ -34,3 +34,38 @@ of a non-positive number raise `ValueError`.
 ```bash
 pytest
 ```
+
+## Scientific calculator web UI
+
+A single-page scientific calculator built with **vanilla HTML, CSS, and
+JavaScript** — no build step, no framework, no npm, and no CDN. It works fully
+offline.
+
+### Opening the page
+
+Just open the file in any modern browser:
+
+```bash
+open webui/index.html        # macOS
+xdg-open webui/index.html    # Linux
+```
+
+Or double-click `webui/index.html` in a file manager. No server is required.
+
+### Features
+
+- Digits `0`–`9`, decimal point, and `=`.
+- Arithmetic: `+ - * /`, parentheses, sign toggle (`+/-`), percent (`%`),
+  clear (`C`), backspace (`←`).
+- Scientific functions (angles in **radians**): `sin`, `cos`, `tan`,
+  `log` (base 10), `ln`, `exp`, `x^y`, `sqrt`, `pi`, `e`, factorial (`n!`).
+- Keyboard input: digits, operators, `Enter` (=), `Backspace` (←), `Escape` (C).
+- Domain errors (divide by zero, `sqrt` of a negative, `log`/`ln` of a
+  non-positive number, factorial of a negative number) show `Error` and reset
+  on the next keystroke.
+
+Expressions are parsed and evaluated with a small built-in tokenizer +
+shunting-yard parser — **`eval()` is never called on input**.
+
+The static assets under `webui/` are covered by `tests/test_webui.py`, which
+runs as part of `pytest`.
